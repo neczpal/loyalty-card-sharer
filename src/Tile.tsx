@@ -13,8 +13,6 @@ export function Tile({card, onSelect} :{
         style={{ backgroundColor: card.color }}
     >
         <h3>{card.name}</h3>
-        <p>{card.code}</p>
-        <span>{card.type}</span>
     </div>
   );
 }

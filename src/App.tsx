@@ -20,9 +20,8 @@ function App() {
 
     return (
         <div className="flex flex-col p-6 md:p-12 h-full items-center justify-around">
-            {selectedCard === null ? (
-                <TileView cards={allCards} onSelect={(card) => setSelectedCard(card)} />
-            ) : (
+            <TileView cards={allCards} onSelect={(card) => setSelectedCard(card)} />
+            {selectedCard !== null && (
                 <DetailsView card={selectedCard} onClose={() => setSelectedCard(null)} />
             )}
         </div>

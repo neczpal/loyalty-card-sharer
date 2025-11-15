@@ -8,7 +8,7 @@ export function TileView({cards, onSelect}: {
     return (
         <>
             <div className="flex justify-center items-center w-full">
-                <h1> 𝄃𝄃𝄂𝄂「Cards」𝄀𝄁𝄃𝄂𝄂𝄃 </h1>
+                <h1>「Cards」</h1>
             </div>
             <div className="w-full grid grid-flow-row grid-cols-2 gap-4">
                 {
