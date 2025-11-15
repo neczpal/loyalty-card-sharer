@@ -1,7 +1,8 @@
+import type {CodeDto} from "./CodeDto.ts";
+
 export type CardDto = {
-    id: number,
+    id: string,
     name: string,
     color: string,
-    code: string,
-    type: string
+    code: CodeDto,
 }

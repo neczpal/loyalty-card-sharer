@@ -1,5 +1,5 @@
-import type {CardDto} from "./data/CardDto.ts";
-import {Tile} from "./Tile.tsx";
+import type {CardDto} from "../data/CardDto.ts";
+import {Tile} from "../components/Tile.tsx";
 
 export function TileView({cards, onSelect}: {
     cards: CardDto[];

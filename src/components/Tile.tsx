@@ -1,4 +1,4 @@
-import type {CardDto} from "./data/CardDto.ts";
+import type {CardDto} from "../data/CardDto.ts";
 
 export function Tile({card, onSelect} :{
     card: CardDto,
