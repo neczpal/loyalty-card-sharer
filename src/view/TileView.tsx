@@ -1,10 +1,16 @@
 import type {CardDto} from "../data/CardDto.ts";
 import {Tile} from "../components/Tile.tsx";
+import {useState} from "react";
 
-export function TileView({cards, onSelect}: {
+
+export function TileView({cards, onOpen, onEdit, onDelete}: {
     cards: CardDto[];
-    onSelect: (card: CardDto) => void;
+    onOpen: (card: CardDto) => void;
+    onEdit: (card: CardDto) => void;
+    onDelete: (card: CardDto) => void;
 }) {
+    const [isEditModeOn, setIsEditModeOn] = useState(false);
+
     return (
         <>
             <div className="flex justify-center items-center w-full">
@@ -14,14 +20,21 @@ export function TileView({cards, onSelect}: {
                 {
                     cards.map(card =>
                         <Tile
+                            key={card.id}
                             card={card}
-                            onSelect={onSelect}
+                            isEditModeOn={isEditModeOn}
+                            onSelect={onOpen}
+                            onEdit={onEdit}
+                            onDelete={onDelete}
                         />)
                 }
             </div>
 
             <div className="flex justify-center items-center w-full">
-                <span>Edit mode</span>
+                <span className="cursor-pointer"
+                      onClick={() => setIsEditModeOn(prevState => !prevState)}>
+                    Edit mode
+                </span>
                 <input type="text" placeholder="Search" />
                 <button>🔎</button>
             </div>

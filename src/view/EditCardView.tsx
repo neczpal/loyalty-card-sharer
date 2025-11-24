@@ -5,19 +5,18 @@ import {BaseIconButton} from "../components/BaseIconButton.tsx";
 import {BarCode} from "../components/BarCode.tsx";
 import type {CardDto} from "../data/CardDto.ts";
 import {useState} from "react";
-import CardStorageService from "../CardStorageService.ts";
 
 export function EditCardView({card, onExit}: {
     card?: CardDto;
-    onExit: () => void;
+    onExit: (card?: CardDto) => void;
 }) {
     const [displayName, setDisplayName] = useState(card?.name || "");
     const [displayColor, setDisplayColor] = useState(card?.color || "#3B82F6");
     const [codeValue, setCodeValue] = useState(card?.code.value || "");
     const [codeType, setCodeType] = useState(card?.code?.type || "qr");
 
-    const save = async () => {
-        CardStorageService.add({
+    const exitWithSave = () => {
+        const cardToBeSaved = {
             id: card?.id || crypto.randomUUID(),
             color: displayColor,
             name: displayName,
@@ -25,8 +24,8 @@ export function EditCardView({card, onExit}: {
                 type: codeType,
                 value: codeValue
             }
-        });
-        onExit();
+        }
+        onExit(cardToBeSaved);
     }
 
     return (
@@ -57,9 +56,9 @@ export function EditCardView({card, onExit}: {
                 {value: '128', label: 'BarCode 128'},
             ]}/>
             <h2>Preview</h2>
-            <BarCode code={{value: codeValue, type: codeType}}/>
+            <BarCode size="small" code={{value: codeValue, type: codeType}}/>
             <BaseIconButton onClick={() => onExit()} text="cancel"/>
-            <BaseIconButton onClick={() => save()} text="Add new card"/>
+            <BaseIconButton onClick={() => exitWithSave()} text="Add new card"/>
         </ModalWindow>
     );
 }

@@ -1,15 +1,16 @@
 import './App.css'
 import type {CardDto} from "./data/CardDto.ts";
 import {TileView} from "./view/TileView.tsx";
-import {DetailsView} from "./view/DetailsView.tsx";
+import {ScanCardView} from "./view/ScanCardView.tsx";
 import {useState} from "react";
 import {EditCardView} from "./view/EditCardView.tsx";
 import CardStorageService from "./CardStorageService.ts";
 
 function App() {
-    const [selectedCard, setSelectedCard] = useState<CardDto | null>(null);
-    const [editorOpen, setEditorOpen] = useState(true);
-
+    const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);
+    const [scanOpen, setScanOpen] = useState(false);
+    const [editorOpen, setEditorOpen] = useState(false);
+    const [allCards, setAllCards] = useState(CardStorageService.load());
     // const allCards: CardDto[] = [
     //     {id: "1", name: "Tesco Clubcard", color: "#00539F", code: { value: "634009540032917769", type: "128" }},
     //     {id: "2", name: "Lidl Plus", color: "#FFD500", code: { value: "77360008206828727", type: "qr"}},
@@ -19,16 +20,54 @@ function App() {
     //     {id: "6", name: "Auchan", color: "#E30613", code: { value: "123123123", type: "qr"}},
     // ];
     // CardStorageService.save(allCards);
-    const allCards = CardStorageService.load();
 
+    const openScanCardView = (card: CardDto) => {
+        setSelectedCard(card);
+        setScanOpen(true);
+    }
+
+    const openEditCardView = (card: CardDto) => {
+        setSelectedCard(card);
+        setEditorOpen(true);
+    }
+
+    const deleteCard = (card: CardDto) => {
+        CardStorageService.remove(card);
+        setAllCards(CardStorageService.load());
+    }
+
+    const closeScanCard = () => {
+        setSelectedCard(undefined);
+        setScanOpen(false);
+    }
+
+    const closeEditCard = (card?: CardDto) => {
+        if (card) {
+            CardStorageService.addOrUpdate(card);
+            setAllCards(CardStorageService.load());
+        }
+        setSelectedCard(undefined);
+        setEditorOpen(false);
+    }
 
     return (
         <div className="flex flex-col p-6 md:p-12 h-full items-center justify-around">
-            <TileView cards={allCards} onSelect={(card) => setSelectedCard(card)} />
-            {editorOpen && <EditCardView onExit={() => setEditorOpen(false)} /> }
-            {selectedCard !== null && (
-                <DetailsView card={selectedCard} onClose={() => setSelectedCard(null)} />
-            )}
+            <TileView
+                cards={allCards}
+                onOpen={(card) => openScanCardView(card)}
+                onEdit={(card) => openEditCardView(card)}
+                onDelete={(card) => deleteCard(card)}
+            />
+            {editorOpen &&
+                <EditCardView
+                    onExit={closeEditCard}
+                    card={selectedCard}
+                />
+            }
+            {scanOpen && selectedCard != undefined &&
+                <ScanCardView card={selectedCard}
+                              onClose={closeScanCard}/>
+            }
         </div>
     )
 }

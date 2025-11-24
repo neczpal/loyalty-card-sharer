@@ -23,13 +23,24 @@ export default class CardStorageService {
         }
     }
 
-    static add(card: CardDto): void {
+    static addOrUpdate(card: CardDto): void {
         try {
-            const cards = this.load();
+            let cards= this.load();
+            cards = cards.filter(c => c.id !== card.id);
             cards.push(card);
             this.save(cards);
         } catch (e) {
             console.error("Failed to add card and save:", e);
+        }
+    }
+
+    static remove(card: CardDto): void {
+        try {
+            const cards = this.load();
+            const filtered = cards.filter(c => c.id !== card.id);
+            this.save(filtered);
+        } catch (e) {
+            console.error("Failed to remove card:", e);
         }
     }
 
