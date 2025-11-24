@@ -1,6 +1,6 @@
 import {ModalWindow} from "../components/ModalWindow";
 
-export default function ImportShareModalView({
+export function ImportShareModalView({
     onOverride,
     onAddAll,
     onCancel
@@ -27,7 +27,7 @@ export default function ImportShareModalView({
                         className="bg-blue-500 text-white px-4 py-2 rounded"
                         onClick={onAddAll}
                     >
-                        Merge
+                        Add All
                     </button>
                     <button
                         className="bg-gray-300 px-4 py-2 rounded"

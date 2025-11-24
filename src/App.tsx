@@ -1,13 +1,13 @@
 import './App.css'
 import type {CardDto} from "./data/CardDto.ts";
-import {TileView} from "./view/TileView.tsx";
+import {TilesView} from "./view/TilesView.tsx";
 import {ScanCardModalView} from "./view/ScanCardModalView.tsx";
 import {useEffect, useState} from "react";
 import {EditCardModalView} from "./view/EditCardModalView.tsx";
+import {ImportShareModalView} from "./view/ImportShareModalView.tsx";
+import {ExportShareModalView} from "./view/ExportShareModalView.tsx";
 import CardStorageService from "./CardStorageService.ts";
 import CardShareService from "./CardShareService.ts";
-import ImportShareModalView from "./view/ImportShareModalView.tsx";
-import ExportShareModalView from "./view/ExportShareModalView.tsx";
 
 function App() {
     const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);
@@ -20,12 +20,23 @@ function App() {
 
     useEffect(() => {
         const shared = CardShareService.importFromUrl();
+        const localCards = CardStorageService.load();
 
+        // share link and no local cards -> import without dialog
+        if (shared && shared.length > 0 && localCards.length === 0) {
+            CardStorageService.save(shared);
+            setAllCards(shared);
+            clearShareQuery();
+            return;
+        }
+
+        // share link and existing cards -> show dialog
         if (shared && shared.length > 0) {
             setPendingSharedCards(shared);
             setImportShareDialogOpen(true);
         }
     }, []);
+
     const clearShareQuery = () => {
         const cleanUrl = window.location.href.split("?")[0];
         window.history.replaceState({}, "", cleanUrl);
@@ -71,7 +82,7 @@ function App() {
 
     return (
         <div className="flex flex-col p-6 md:p-12 h-full items-center justify-around">
-            <TileView
+            <TilesView
                 cards={allCards}
                 onOpen={(card) => openScanCardView(card)}
                 onEdit={(card) => openEditCardView(card)}
@@ -106,7 +117,7 @@ function App() {
             }
             {editorOpen &&
                 <EditCardModalView
-                    onExit={closeEditCard}
+                    onExit={card => closeEditCard(card)}
                     card={selectedCard}
                 />
             }

@@ -3,7 +3,7 @@ import {Tile} from "../components/Tile.tsx";
 import {useState, useMemo} from "react";
 
 
-export function TileView({cards, onOpen, onEdit, onDelete, onShare}: {
+export function TilesView({cards, onOpen, onEdit, onDelete, onShare}: {
     cards: CardDto[];
     onOpen: (card: CardDto) => void;
     onEdit: (card?: CardDto) => void;

@@ -29,8 +29,7 @@ export function EditCardModalView({card, onExit}: {
     }
 
     return (
-        <ModalWindow color="#000" onClose={() => {
-        }}>
+        <ModalWindow color="#000" onClose={onExit}>
             <h1>Add new card to your collection:</h1>
             <BaseTextInput label="Card name" name="shop" placeholder="card name" value={displayName}
                            onChange={setDisplayName}/>
@@ -57,8 +56,8 @@ export function EditCardModalView({card, onExit}: {
             ]}/>
             <h2>Preview</h2>
             <BarCode size="small" code={{value: codeValue, type: codeType}}/>
-            <BaseIconButton onClick={() => onExit()} text="cancel"/>
-            <BaseIconButton onClick={() => exitWithSave()} text="Add new card"/>
+            <BaseIconButton onClick={onExit} text="cancel"/>
+            <BaseIconButton onClick={exitWithSave} text="Add new card"/>
         </ModalWindow>
     );
 }

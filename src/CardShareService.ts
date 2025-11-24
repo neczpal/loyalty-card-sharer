@@ -1,9 +1,8 @@
 import CardStorageService from "./CardStorageService";
 import type {CardDto} from "./data/CardDto";
 import LZString from "lz-string";
+import type {ShareCardDto} from "./data/ShareCardDto.ts";
 
-// [name, color, type, value]
-type ShareCardDto = [string, string, string, string];
 
 export default class CardShareService {
 

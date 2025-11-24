@@ -2,7 +2,7 @@ import {useState} from "react";
 import {ModalWindow} from "../components/ModalWindow";
 import {BarCode} from "../components/BarCode"; // adjust path if needed
 
-export default function ExportShareModalView({shareUrl, onClose}: {
+export function ExportShareModalView({shareUrl, onClose}: {
     shareUrl: string;
     onClose: () => void;
 }) {
