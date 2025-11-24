@@ -1,17 +1,36 @@
 import './App.css'
 import type {CardDto} from "./data/CardDto.ts";
 import {TileView} from "./view/TileView.tsx";
-import {ScanCardView} from "./view/ScanCardView.tsx";
-import {useState} from "react";
-import {EditCardView} from "./view/EditCardView.tsx";
+import {ScanCardModalView} from "./view/ScanCardModalView.tsx";
+import {useEffect, useState} from "react";
+import {EditCardModalView} from "./view/EditCardModalView.tsx";
 import CardStorageService from "./CardStorageService.ts";
+import CardShareService from "./CardShareService.ts";
+import ImportShareModalView from "./view/ImportShareModalView.tsx";
+import ExportShareModalView from "./view/ExportShareModalView.tsx";
 
 function App() {
     const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);
     const [scanOpen, setScanOpen] = useState(false);
     const [editorOpen, setEditorOpen] = useState(false);
     const [allCards, setAllCards] = useState(CardStorageService.load());
-    // const allCards: CardDto[] = [
+    const [pendingSharedCards, setPendingSharedCards] = useState<CardDto[] | null>(null);
+    const [importShareDialogOpen, setImportShareDialogOpen] = useState(false);
+    const [shareWindowOpen, setShareWindowOpen] = useState(false);
+
+    useEffect(() => {
+        const shared = CardShareService.importFromUrl();
+
+        if (shared && shared.length > 0) {
+            setPendingSharedCards(shared);
+            setImportShareDialogOpen(true);
+        }
+    }, []);
+    const clearShareQuery = () => {
+        const cleanUrl = window.location.href.split("?")[0];
+        window.history.replaceState({}, "", cleanUrl);
+    };
+    // const init: CardDto[] = [
     //     {id: "1", name: "Tesco Clubcard", color: "#00539F", code: { value: "634009540032917769", type: "128" }},
     //     {id: "2", name: "Lidl Plus", color: "#FFD500", code: { value: "77360008206828727", type: "qr"}},
     //     {id: "3", name: "MOL Move", color: "#007A33", code: { value: "6369472225706715", type: "128"}},
@@ -19,14 +38,14 @@ function App() {
     //     {id: "5", name: "Aldi", color: "#1C5FA8",  code: { value: "123123123", type: "qr"}},
     //     {id: "6", name: "Auchan", color: "#E30613", code: { value: "123123123", type: "qr"}},
     // ];
-    // CardStorageService.save(allCards);
+    // CardStorageService.save(init);
 
     const openScanCardView = (card: CardDto) => {
         setSelectedCard(card);
         setScanOpen(true);
     }
 
-    const openEditCardView = (card: CardDto) => {
+    const openEditCardView = (card?: CardDto) => {
         setSelectedCard(card);
         setEditorOpen(true);
     }
@@ -57,16 +76,43 @@ function App() {
                 onOpen={(card) => openScanCardView(card)}
                 onEdit={(card) => openEditCardView(card)}
                 onDelete={(card) => deleteCard(card)}
+                onShare={() => setShareWindowOpen(true)}
             />
+            {importShareDialogOpen && pendingSharedCards &&
+                <ImportShareModalView
+                    onOverride={() => {
+                        CardStorageService.save(pendingSharedCards);
+                        setAllCards(pendingSharedCards);
+                        clearShareQuery();
+                        setImportShareDialogOpen(false);
+                    }}
+                    onAddAll={() => {
+                        const merged = [...allCards, ...pendingSharedCards];
+                        CardStorageService.save(merged);
+                        setAllCards(merged);
+                        clearShareQuery();
+                        setImportShareDialogOpen(false);
+                    }}
+                    onCancel={() => {
+                        clearShareQuery();
+                        setImportShareDialogOpen(false)
+                    }}
+                />
+            }
+            {shareWindowOpen &&
+                <ExportShareModalView shareUrl={CardShareService.createShareUrl()}
+                                      onClose={() => setShareWindowOpen(false)}
+                />
+            }
             {editorOpen &&
-                <EditCardView
+                <EditCardModalView
                     onExit={closeEditCard}
                     card={selectedCard}
                 />
             }
             {scanOpen && selectedCard != undefined &&
-                <ScanCardView card={selectedCard}
-                              onClose={closeScanCard}/>
+                <ScanCardModalView card={selectedCard}
+                                   onClose={closeScanCard}/>
             }
         </div>
     )

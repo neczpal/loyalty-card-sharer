@@ -6,7 +6,7 @@ import {BarCode} from "../components/BarCode.tsx";
 import type {CardDto} from "../data/CardDto.ts";
 import {useState} from "react";
 
-export function EditCardView({card, onExit}: {
+export function EditCardModalView({card, onExit}: {
     card?: CardDto;
     onExit: (card?: CardDto) => void;
 }) {

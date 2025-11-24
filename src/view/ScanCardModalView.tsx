@@ -2,7 +2,7 @@ import type {CardDto} from "../data/CardDto.ts";
 import {BarCode} from "../components/BarCode.tsx";
 import {ModalWindow} from "../components/ModalWindow.tsx";
 
-export function ScanCardView({card, onClose}: {
+export function ScanCardModalView({card, onClose}: {
     card: CardDto;
     onClose: () => void;
 }) {
