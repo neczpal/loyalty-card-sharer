@@ -101,3 +101,13 @@ button:focus-visible {
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
+
+@keyframes wiggle {
+    0% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg); }
+    100% { transform: rotate(-1deg); }
+}
+
+.wiggle {
+    animation: wiggle 0.3s ease-in-out 5;
+}

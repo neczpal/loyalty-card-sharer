@@ -1,6 +1,6 @@
 import './App.css'
 import type {CardDto} from "./data/CardDto.ts";
-import {TilesView} from "./view/TilesView.tsx";
+import {ListView} from "./view/ListView.tsx";
 import {ScanCardModalView} from "./view/ScanCardModalView.tsx";
 import {useEffect, useState} from "react";
 import {EditCardModalView} from "./view/EditCardModalView.tsx";
@@ -80,14 +80,20 @@ function App() {
         setEditorOpen(false);
     }
 
+    const reorderCards = (cards: CardDto[]) => {
+        CardStorageService.save(cards);
+        setAllCards(cards);
+    };
+
     return (
         <div className="flex flex-col p-6 md:p-12 h-full items-center justify-around">
-            <TilesView
+            <ListView
                 cards={allCards}
                 onOpen={(card) => openScanCardView(card)}
                 onEdit={(card) => openEditCardView(card)}
                 onDelete={(card) => deleteCard(card)}
                 onShare={() => setShareWindowOpen(true)}
+                onReorder={(card) => reorderCards(card)}
             />
             {importShareDialogOpen && pendingSharedCards &&
                 <ImportShareModalView
