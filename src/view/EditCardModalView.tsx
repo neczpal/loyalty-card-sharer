@@ -79,8 +79,12 @@ export function EditCardModalView({card, onExit}: {
                     )
                     }
                     <div className="flex flex-row mt-auto justify-center gap-8">
-                        <BaseIconButton onClick={exitWithSave} text={saveText} iconName={saveIcon} variant="primary"/>
-                        <BaseIconButton onClick={() => onExit()} text="Cancel" iconName="close"/>
+                        <BaseIconButton onClick={exitWithSave}
+                                        text={saveText}
+                                        iconName={saveIcon}
+                                        variant="primary"
+                                        disabled={!displayName || !codeValue} />
+                        <BaseIconButton onClick={() => onExit()} text="Cancel" iconName="close" />
                     </div>
                 </div>
             </LayoutModal>

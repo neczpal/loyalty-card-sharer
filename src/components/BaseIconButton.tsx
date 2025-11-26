@@ -5,9 +5,10 @@ type IconButtonProps = {
     text: string,
     iconName?: string,
     variant?: 'primary' | 'danger' | 'cancel' | 'default',
+    disabled?: boolean,
 }
 
-export function BaseIconButton({onClick, text, iconName, variant = 'default'}: IconButtonProps) {
+export function BaseIconButton({onClick, text, iconName, variant = 'default', disabled = false}: IconButtonProps) {
 
     const baseClasses = "flex g-1 items-center px-4 py-2 rounded-md";
 
@@ -21,9 +22,12 @@ export function BaseIconButton({onClick, text, iconName, variant = 'default'}: I
             break;
     }
 
-    return <button className={`${baseClasses} ${variantClasses}`}
+    const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";
+
+    return <button className={`${baseClasses} ${variantClasses} ${disabledClasses}`}
                    type="button"
-                   onClick={onClick}>
+                   onClick={onClick}
+                   disabled={disabled}>
         {iconName && <BaseIcon iconName={iconName}/>}
         {text && (
             <span className="ml-1">{text}</span>
