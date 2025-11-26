@@ -1,3 +1,5 @@
+import { BaseIcon } from './BaseIcon';
+
 interface BaseSearchFieldProps {
     value: string;
     onChange: (value: string) => void;
@@ -15,11 +17,11 @@ export function BaseSearchField({ value, onChange, placeholder = "Search" }: Bas
                 className="w-full px-10 py-2 border rounded-md"
             />
             <div className="absolute left-3">
-                <span>🔎</span>
+                <BaseIcon iconName="search" />
             </div>
             {value.length > 0 && (
                 <button onClick={() => onChange("")} className="absolute right-3">
-                    <span>❌</span>
+                    <BaseIcon iconName="close" />
                 </button>
             )}
         </div>

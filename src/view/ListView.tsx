@@ -4,6 +4,8 @@ import {useState, useMemo} from "react";
 import {List, arrayMove} from "react-movable";
 import {LayoutDefault} from "../layouts/LayoutDefault.tsx";
 import {BaseSearchField} from "../components/BaseSearchField.tsx";
+import {BaseIconButton} from "../components/BaseIconButton.tsx";
+import {BaseToggleButton} from "../components/BaseToggleButton.tsx";
 
 export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: {
     cards: CardDto[];
@@ -29,32 +31,29 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
     }, [cards, search]);
 
     const footer = <div className="flex justify-center items-center w-full gap-4">
-         <span className="cursor-pointer"
-               onClick={toggleEditMode}>
-                        ⚙️
-                    </span>
-
         {isEditModeOn &&
-            <div
-                className="cursor-pointer p-6 rounded-xl shadow-lg flex items-center justify-center
-                                   transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-                                   bg-gray-200 text-gray-700 text-3xl"
+            <BaseIconButton
                 onClick={() => onEdit()}
-            >
-                +
-            </div>
+                iconName="add"
+                text="Add Card"
+            />
         }
 
         {isEditModeOn &&
-            <div
-                className="cursor-pointer p-6 rounded-xl shadow-lg flex items-center justify-center
-                                   transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-                                   bg-blue-200 text-blue-700 text-3xl"
+            <BaseIconButton
                 onClick={() => onShare()}
-            >
-                🔗
-            </div>
+                iconName="share"
+                text="Share"
+            />
         }
+        <BaseToggleButton
+            onClick={toggleEditMode}
+            toggled={isEditModeOn}
+            onIconName="close"
+            offIconName="settings"
+            onText="Close"
+            offText="Edit"
+        />
         {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;
 

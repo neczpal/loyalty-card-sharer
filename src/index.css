@@ -56,6 +56,12 @@ button:focus-visible {
   }
 }
 
+.user-select-none {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
 @keyframes flipInGrow {
     0% {
         transform: rotateY(90deg) scale(0.5);

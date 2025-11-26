@@ -11,7 +11,7 @@ export function LayoutDefault({ children, footer, header }: { children: React.Re
             <main className="w-full flex-grow overflow-y-auto pb-32">
                 {children}
             </main>
-            <footer className="w-full flex-shrink-0 fixed bottom-0 left-0 right-0 bg-white p-4">
+            <footer className="w-full border-t border-gray-200 dark:border-gray-700  flex-shrink-0 fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 p-4">
                 {footer}
             </footer>
         </div>
