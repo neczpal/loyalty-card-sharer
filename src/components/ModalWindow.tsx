@@ -1,10 +1,11 @@
 import {useState} from "react";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
-export function ModalWindow({children, color, onClose}: {
+export function ModalWindow({children, color, onClose, size = 'modal'}: {
     children: React.ReactNode;
     color?: string;
     onClose: () => void;
+    size?: 'modal' | 'dialog';
 }) {
     const [closing, setClosing] = useState(false);
 
@@ -16,11 +17,15 @@ export function ModalWindow({children, color, onClose}: {
 
     const modalStyle = color ? { backgroundColor: color, color: "white" } : {};
 
+    const sizeClasses = size === 'modal'
+        ? 'h-[80vh]'
+        : 'h-fit max-h-[80vh]';
+
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
              onClick={handleClose}
         >
-            <div className={`w-[80vw] h-[80vh] rounded-2xl shadow-2xl flip-in relative overflow-auto
+            <div className={`w-[80vw] ${sizeClasses} rounded-2xl shadow-2xl flip-in relative overflow-auto
                 bg-white dark:bg-gray-800 text-gray-900 dark:text-white
                 ${closing ? "flip-out" : "flip-in"}
             `}

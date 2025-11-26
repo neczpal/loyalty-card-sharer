@@ -12,7 +12,7 @@ export function EditCardModalView({card, onExit}: {
     onExit: (card?: CardDto) => void;
 }) {
     const [displayName, setDisplayName] = useState(card?.name || "");
-    const [displayColor, setDisplayColor] = useState(card?.color || "#3B82F6");
+    const [displayColor, setDisplayColor] = useState(card?.color || "#0ea5e9");
     const [codeValue, setCodeValue] = useState(card?.code.value || "");
     const [codeType, setCodeType] = useState(card?.code?.type || "qr");
 
@@ -45,14 +45,14 @@ export function EditCardModalView({card, onExit}: {
 
                     <BaseDropdownInput label="Color" name="card_color" value={displayColor} onChange={setDisplayColor}
                                        options={[
-                                           {value: '#3B82F6', label: 'Blue'},
+                                           {value: '#0ea5e9', label: 'Sky'},
                                            {value: '#06B6D4', label: 'Cyan'},
                                            {value: '#14B8A6', label: 'Teal'},
                                            {value: '#22C55E', label: 'Green'},
                                            {value: '#84CC16', label: 'Lime'},
                                            {value: '#EAB308', label: 'Yellow'},
                                            {value: '#F59E0B', label: 'Orange'},
-                                           {value: '#EF4444', label: 'Red'},
+                                           {value: '#f43f5e', label: 'Rose'},
                                            {value: '#EC4899', label: 'Pink'},
                                            {value: '#A855F7', label: 'Purple'},
                                            {value: '#6366F1', label: 'Indigo'},
@@ -72,14 +72,14 @@ export function EditCardModalView({card, onExit}: {
                                        ]}/>
 
                     <span>Preview: </span>
-                    { codeValue ? (
+                    {codeValue ? (
                         <BarCode size="small" code={{value: codeValue, type: codeType}}/>
                     ) : (
                         <span className="text-center color-black/50">Enter a code to see preview</span>
                     )
                     }
                     <div className="flex flex-row mt-auto justify-center gap-8">
-                        <BaseIconButton onClick={exitWithSave} text={saveText} iconName={saveIcon}/>
+                        <BaseIconButton onClick={exitWithSave} text={saveText} iconName={saveIcon} variant="primary"/>
                         <BaseIconButton onClick={() => onExit()} text="Cancel" iconName="close"/>
                     </div>
                 </div>

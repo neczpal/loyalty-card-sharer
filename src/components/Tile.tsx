@@ -31,11 +31,13 @@ export function Tile({card, isEditModeOn, onSelect, onEdit, onDelete}: {
                             onClick={() => onEdit(card)}
                             iconName="edit"
                             text=""
+                            variant="primary"
                         />
                         <BaseIconButton
                             onClick={() => onDelete(card)}
                             iconName="delete"
                             text=""
+                            variant="danger"
                         />
                     </div>
                 }

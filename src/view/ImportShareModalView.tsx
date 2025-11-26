@@ -1,4 +1,6 @@
 import {ModalWindow} from "../components/ModalWindow";
+import {LayoutModal} from "../layouts/LayoutModal.tsx";
+import {BaseIconButton} from "../components/BaseIconButton.tsx";
 
 export function ImportShareModalView({
     onOverride,
@@ -11,32 +13,30 @@ export function ImportShareModalView({
 }) {
 
     return (
-        <ModalWindow onClose={onCancel}>
-            <div className="flex flex-col p-4 gap-4 text-black">
-                <h2 className="text-xl font-bold">Shared Cards Detected</h2>
-                <p>Do you want to import the shared card data?</p>
+        <ModalWindow onClose={onCancel} size="dialog">
+            <LayoutModal header="Import Shared Cards">
+                    <p className="text-center mb-4">Do you want to import the shared card data?</p>
 
-                <div className="flex gap-4 justify-center">
-                    <button
-                        className="bg-red-500 text-white px-4 py-2 rounded"
-                        onClick={onOverride}
-                    >
-                        Override
-                    </button>
-                    <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                        onClick={onAddAll}
-                    >
-                        Add All
-                    </button>
-                    <button
-                        className="bg-gray-300 px-4 py-2 rounded"
-                        onClick={onCancel}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
+                    <div className="flex gap-4 justify-center">
+                        <BaseIconButton
+                            onClick={onOverride}
+                            text="Override"
+                            iconName="arrow_circle_up"
+                            variant="danger"
+                        />
+                        <BaseIconButton
+                            onClick={onAddAll}
+                            text="Add All"
+                            iconName="add_circle"
+                            variant="primary"
+                        />
+                        <BaseIconButton
+                            onClick={onCancel}
+                            text="Cancel"
+                            iconName="cancel"
+                        />
+                    </div>
+            </LayoutModal>
         </ModalWindow>
     );
 }

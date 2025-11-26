@@ -34,7 +34,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
         {isEditModeOn &&
             <BaseIconButton
                 onClick={() => onEdit()}
-                iconName="add"
+                iconName="add_card"
                 text=""
             />
         }
