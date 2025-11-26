@@ -35,7 +35,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             <BaseIconButton
                 onClick={() => onEdit()}
                 iconName="add_card"
-                text=""
+                text="Add new card"
             />
         }
 
@@ -51,7 +51,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             toggled={isEditModeOn}
             onIconName="close"
             offIconName="dashboard_customize"
-            onText=""
+            onText="Stop editing"
             offText=""
         />
         {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}

@@ -9,7 +9,7 @@ export function ExportShareModalView({shareUrl, onClose}: {
 }) {
     return (
         <ModalWindow onClose={onClose}>
-            <LayoutModal header="Share Your Cards">
+            <LayoutModal header="Share cards">
                 <div className="self-center">
                     <BarCode
                         code={{

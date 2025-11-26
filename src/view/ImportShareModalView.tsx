@@ -14,7 +14,7 @@ export function ImportShareModalView({
 
     return (
         <ModalWindow onClose={onCancel} size="dialog">
-            <LayoutModal header="Import Shared Cards">
+            <LayoutModal header="Import shared cards">
                     <p className="text-center mb-4">Do you want to import the shared card data?</p>
 
                     <div className="flex gap-4 justify-center">
