@@ -1,0 +1,29 @@
+{
+  "name": "Loyalty Cards Sharer App",
+  "short_name": "LoyaltyCards",
+  "start_url": "./?mode=pwa",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "dark-desktop.png",
+      "sizes": "1117x995",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Loyalty Cards List Screen"
+    },
+    {
+      "src": "dark-mobile.png",
+      "sizes": "500x996",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Loyalty Cards List Screen"
+    }
+  ]
+}
