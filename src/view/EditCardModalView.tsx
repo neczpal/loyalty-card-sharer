@@ -12,7 +12,7 @@ export function EditCardModalView({card, onExit}: {
     onExit: (card?: CardDto) => void;
 }) {
     const [displayName, setDisplayName] = useState(card?.name || "");
-    const [displayColor, setDisplayColor] = useState(card?.color || "#0ea5e9");
+    const [displayColor, setDisplayColor] = useState(card?.color || "#0EA5E9");
     const [codeValue, setCodeValue] = useState(card?.code.value || "");
     const [codeType, setCodeType] = useState(card?.code?.type || "qr");
 
