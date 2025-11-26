@@ -1,4 +1,4 @@
-import { BaseIcon } from './BaseIcon';
+import {BaseIcon} from './BaseIcon';
 
 type IconButtonProps = {
     onClick: () => void,
@@ -27,7 +27,9 @@ export function BaseIconButton({onClick, text, iconName, variant = 'default'}: I
     return <button className={`${baseClasses} ${variantClasses}`}
                    type="button"
                    onClick={onClick}>
-        {iconName && <BaseIcon iconName={iconName} />}
-        {text}
+        {iconName && <BaseIcon iconName={iconName}/>}
+        {text && (
+            <span className="ml-1">{text}</span>
+        )}
     </button>
 }

@@ -86,7 +86,7 @@ function App() {
     };
 
     return (
-        <div className="flex flex-col px-6 md:px-12 h-full items-center justify-around">
+        <div className="flex flex-col h-full items-center justify-around">
             <ListView
                 cards={allCards}
                 onOpen={(card) => openScanCardView(card)}
