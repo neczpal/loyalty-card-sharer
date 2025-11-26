@@ -3,6 +3,7 @@ import {Tile} from "../components/Tile.tsx";
 import {useState, useMemo} from "react";
 import {List, arrayMove} from "react-movable";
 import {LayoutDefault} from "../layouts/LayoutDefault.tsx";
+import {BaseSearchField} from "../components/BaseSearchField.tsx";
 
 export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: {
     cards: CardDto[];
@@ -27,7 +28,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
         );
     }, [cards, search]);
 
-    const footer = <div className="flex justify-between items-center w-full">
+    const footer = <div className="flex justify-center items-center w-full gap-4">
          <span className="cursor-pointer"
                onClick={toggleEditMode}>
                         ⚙️
@@ -54,18 +55,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                 🔗
             </div>
         }
-        {!isEditModeOn && cards.length > 4 && <>
-            <input
-                type="text"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Search"
-            />
-            <button onClick={() => setSearch("")}>
-                {search.length > 0 ? "❌" : "🔎"}
-            </button>
-        </>
-        }
+        {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;
 
     return (
@@ -77,7 +67,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                     onReorder(updated);
                 }}
                 renderList={({children, props}) => (
-                    <ul {...(isEditModeOn ? props : {})} className="flex flex-col gap-4 w-full px-4">
+                    <ul {...(isEditModeOn ? props : {})} className="flex flex-col gap-4 w-full p-4">
                         {children}
                     </ul>
                 )}
