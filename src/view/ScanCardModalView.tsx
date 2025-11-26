@@ -1,6 +1,8 @@
 import type {CardDto} from "../data/CardDto.ts";
 import {BarCode} from "../components/BarCode.tsx";
 import {ModalWindow} from "../components/ModalWindow.tsx";
+import {BaseCopyField} from "../components/BaseCopyField.tsx";
+import {LayoutModal} from "../layouts/LayoutModal.tsx";
 
 export function ScanCardModalView({card, onClose}: {
     card: CardDto;
@@ -8,9 +10,11 @@ export function ScanCardModalView({card, onClose}: {
 }) {
     return (
         <ModalWindow onClose={onClose} color={card.color}>
-            <h2 className="text-3xl font-bold mb-4 text-center">{card.name}</h2>
-            <p className="text-lg font-mono text-center">Kártya kódja: {card.code.value}</p>
-            <BarCode code={card.code} />
+            <LayoutModal header={card.name}>
+                <BarCode code={card.code}/>
+                <span className="text-lg text-center mt-4">Card Code:</span>
+                <BaseCopyField copyText={card.code.value}/>
+            </LayoutModal>
         </ModalWindow>
     );
 }

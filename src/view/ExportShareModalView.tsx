@@ -1,6 +1,6 @@
 import {ModalWindow} from "../components/ModalWindow";
 import {BarCode} from "../components/BarCode";
-import {BaseUrlCopyField} from "../components/BaseUrlCopyField.tsx";
+import {BaseCopyField} from "../components/BaseCopyField.tsx";
 import {LayoutModal} from "../layouts/LayoutModal.tsx";
 
 export function ExportShareModalView({shareUrl, onClose}: {
@@ -19,7 +19,7 @@ export function ExportShareModalView({shareUrl, onClose}: {
                         size="large"
                     />
                 </div>
-                <BaseUrlCopyField url={shareUrl} />
+                <BaseCopyField copyText={shareUrl} />
             </LayoutModal>
         </ModalWindow>
     );

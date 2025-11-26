@@ -14,15 +14,17 @@ export function ModalWindow({children, color, onClose}: {
         setTimeout(() => onClose(), 150); // match animation duration
     };
 
+    const modalStyle = color ? { backgroundColor: color, color: "white" } : {};
+
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
              onClick={handleClose}
         >
             <div className={`w-[80vw] h-[80vh] rounded-2xl shadow-2xl flip-in relative overflow-auto
-                bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                bg-white dark:bg-gray-800 text-gray-900 dark:text-white
                 ${closing ? "flip-out" : "flip-in"}
             `}
-                 style={{ backgroundColor: color }}
+                 style={modalStyle}
                  onClick={e => e.stopPropagation()}
             >
                 <div className="absolute top-4 right-4">

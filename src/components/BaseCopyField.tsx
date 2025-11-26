@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { BaseToggleButton } from "./BaseToggleButton";
 
-interface BaseUrlCopyFieldProps {
-    url: string;
+interface BaseCopyFieldProps {
+    copyText: string;
 }
 
-export function BaseUrlCopyField({ url }: BaseUrlCopyFieldProps) {
+export function BaseCopyField({ copyText }: BaseCopyFieldProps) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(copyText);
             setCopied(true);
             setTimeout(() => setCopied(false), 5000);
         } catch (e) {
@@ -24,7 +24,7 @@ export function BaseUrlCopyField({ url }: BaseUrlCopyFieldProps) {
                 className="border px-3 py-2 flex-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600"
                 type="text"
                 readOnly
-                value={url}
+                value={copyText}
             />
             <BaseToggleButton
                 onClick={handleCopy}
