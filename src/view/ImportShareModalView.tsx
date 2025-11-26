@@ -20,19 +20,19 @@ export function ImportShareModalView({
                     <div className="flex gap-4 justify-center">
                         <BaseIconButton
                             onClick={onOverride}
-                            text="Override my collection"
+                            text="Override"
                             iconName="arrow_circle_up"
                             variant="danger"
                         />
                         <BaseIconButton
                             onClick={onAddAll}
-                            text="Merge collections"
+                            text="Merge"
                             iconName="add_circle"
                             variant="primary"
                         />
                         <BaseIconButton
                             onClick={onCancel}
-                            text="Don't import"
+                            text="Cancel"
                             iconName="cancel"
                         />
                     </div>

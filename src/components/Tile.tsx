@@ -12,8 +12,8 @@ export function Tile({card, isEditModeOn, onSelect, onEdit, onDelete}: {
         <div
             onClick={() => onSelect(card)}
             className={`${isEditModeOn ? "cursor-move" : "cursor-pointer"} relative p-8 rounded-xl shadow-lg
-             transform transition-all duration-300 text-white
-             hover:scale-105 hover:shadow-xl`}
+             transform transition-all duration-300 text-white 
+             hover:scale-105 hover:shadow-xl lg:hover:scale-105 lg:hover:shadow-xl`}
             style={{backgroundColor: card.color}}
         >
             {isEditModeOn && (
