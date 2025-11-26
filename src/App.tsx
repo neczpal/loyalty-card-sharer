@@ -6,8 +6,8 @@ import {useEffect, useState} from "react";
 import {EditCardModalView} from "./view/EditCardModalView.tsx";
 import {ImportShareModalView} from "./view/ImportShareModalView.tsx";
 import {ExportShareModalView} from "./view/ExportShareModalView.tsx";
-import CardStorageService from "./CardStorageService.ts";
-import CardShareService from "./CardShareService.ts";
+import CardStorageService from "./services/CardStorageService.ts";
+import CardShareService from "./services/CardShareService.ts";
 
 function App() {
     const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);

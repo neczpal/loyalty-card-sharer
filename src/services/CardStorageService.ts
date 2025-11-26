@@ -1,4 +1,4 @@
-import type { CardDto } from "./data/CardDto";
+import type { CardDto } from "../data/CardDto.ts";
 
 export default class CardStorageService {
     private static readonly KEY = "cardList";

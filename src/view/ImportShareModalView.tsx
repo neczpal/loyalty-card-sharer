@@ -15,24 +15,24 @@ export function ImportShareModalView({
     return (
         <ModalWindow onClose={onCancel} size="dialog">
             <LayoutModal header="Import shared cards">
-                    <p className="text-center mb-4">Do you want to import the shared card data?</p>
+                    <p className="text-center mb-4">You already have cards on this device what do you want to do?</p>
 
                     <div className="flex gap-4 justify-center">
                         <BaseIconButton
                             onClick={onOverride}
-                            text="Override"
+                            text="Override my collection"
                             iconName="arrow_circle_up"
                             variant="danger"
                         />
                         <BaseIconButton
                             onClick={onAddAll}
-                            text="Add All"
+                            text="Merge collections"
                             iconName="add_circle"
                             variant="primary"
                         />
                         <BaseIconButton
                             onClick={onCancel}
-                            text="Cancel"
+                            text="Don't import"
                             iconName="cancel"
                         />
                     </div>
