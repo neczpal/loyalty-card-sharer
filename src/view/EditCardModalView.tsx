@@ -29,7 +29,7 @@ export function EditCardModalView({card, onExit}: {
     }
 
     return (
-        <ModalWindow color="#000" onClose={onExit}>
+        <ModalWindow onClose={onExit}>
             <h1>Add new card to your collection:</h1>
             <BaseTextInput label="Card name" name="shop" placeholder="card name" value={displayName}
                            onChange={setDisplayName}/>
