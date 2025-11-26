@@ -45,14 +45,14 @@ export function EditCardModalView({card, onExit}: {
 
                     <BaseDropdownInput label="Color" name="card_color" value={displayColor} onChange={setDisplayColor}
                                        options={[
-                                           {value: '#0ea5e9', label: 'Sky'},
+                                           {value: '#0EA5E9', label: 'Sky'},
                                            {value: '#06B6D4', label: 'Cyan'},
                                            {value: '#14B8A6', label: 'Teal'},
                                            {value: '#22C55E', label: 'Green'},
                                            {value: '#84CC16', label: 'Lime'},
                                            {value: '#EAB308', label: 'Yellow'},
                                            {value: '#F59E0B', label: 'Orange'},
-                                           {value: '#f43f5e', label: 'Rose'},
+                                           {value: '#F43F5E', label: 'Rose'},
                                            {value: '#EC4899', label: 'Pink'},
                                            {value: '#A855F7', label: 'Purple'},
                                            {value: '#6366F1', label: 'Indigo'},
