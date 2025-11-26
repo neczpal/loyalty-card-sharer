@@ -1,7 +1,8 @@
 {
   "name": "Loyalty Cards Sharer App",
   "short_name": "LoyaltyCards",
-  "start_url": "./?mode=pwa",
+  "scope": "/loyalty-card-sharer/dist/",
+  "start_url": "/loyalty-card-sharer/dist/?mode=pwa",
   "display": "standalone",
   "icons": [
     {
@@ -38,5 +39,6 @@
       "form_factor": "narrow",
       "label": "Loyalty Cards List Screen"
     }
-  ]
+  ],
+  "handle_links": "auto"
 }
