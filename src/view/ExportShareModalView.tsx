@@ -7,13 +7,10 @@ export function ExportShareModalView({shareUrl, onClose}: {
     shareUrl: string;
     onClose: () => void;
 }) {
-    const header = <h2 className="text-xl font-bold">Share Your Cards</h2>;
-
     return (
         <ModalWindow onClose={onClose}>
-            <LayoutModal header={header}>
-                <BaseUrlCopyField url={shareUrl} />
-                <div className="mt-4 self-center">
+            <LayoutModal header="Share Your Cards">
+                <div className="self-center">
                     <BarCode
                         code={{
                             type: "qr",
@@ -22,6 +19,7 @@ export function ExportShareModalView({shareUrl, onClose}: {
                         size="large"
                     />
                 </div>
+                <BaseUrlCopyField url={shareUrl} />
             </LayoutModal>
         </ModalWindow>
     );

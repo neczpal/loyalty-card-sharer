@@ -50,7 +50,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             onClick={toggleEditMode}
             toggled={isEditModeOn}
             onIconName="close"
-            offIconName="settings"
+            offIconName="dashboard_customize"
             onText=""
             offText=""
         />
@@ -75,8 +75,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                         <Tile
                             card={card}
                             isEditModeOn={isEditModeOn}
-                            onSelect={isEditModeOn ? () => {
-                            } : onOpen}
+                            onSelect={isEditModeOn ? () => {} : onOpen}
                             onEdit={onEdit}
                             onDelete={onDelete}
                         />

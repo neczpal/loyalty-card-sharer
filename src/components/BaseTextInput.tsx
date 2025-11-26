@@ -11,9 +11,9 @@ export type TextInputProps = {
 
 export function BaseTextInput({label, name, value, onChange, type, placeholder, onEnter, autofocus}:
                           TextInputProps) {
-    return <div>
-        <label className="text-lg font-mono text-center" htmlFor={name}>{label}: </label>
-        <input className="p-3"
+    return <div className="flex flex-col items-center gap-2 m-2">
+        <label className="text-md self-start" htmlFor={name}>{label}: </label>
+        <input className="h-[40px] w-full p-4 bg-gray-100 dark:bg-gray-700"
                name={name}
                type={type}
                value={value}

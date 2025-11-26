@@ -1,8 +1,9 @@
 import {useState} from "react";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
-export function ModalWindow({children, onClose}: {
+export function ModalWindow({children, color, onClose}: {
     children: React.ReactNode;
+    color?: string;
     onClose: () => void;
 }) {
     const [closing, setClosing] = useState(false);
@@ -21,12 +22,13 @@ export function ModalWindow({children, onClose}: {
                 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
                 ${closing ? "flip-out" : "flip-in"}
             `}
+                 style={{ backgroundColor: color }}
                  onClick={e => e.stopPropagation()}
             >
                 <div className="absolute top-4 right-4">
                     <BaseIconButton onClick={handleClose} iconName="close" text="" />
                 </div>
-                <div className="flex flex-col gap-4 p-6">
+                <div className="flex flex-col h-full gap-4 p-6">
                     {children}
                 </div>
             </div>

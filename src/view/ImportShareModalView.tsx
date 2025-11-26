@@ -11,7 +11,7 @@ export function ImportShareModalView({
 }) {
 
     return (
-        <ModalWindow onClose={onCancel} color="#fff">
+        <ModalWindow onClose={onCancel}>
             <div className="flex flex-col p-4 gap-4 text-black">
                 <h2 className="text-xl font-bold">Shared Cards Detected</h2>
                 <p>Do you want to import the shared card data?</p>
