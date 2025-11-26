@@ -41,15 +41,6 @@ function App() {
         const cleanUrl = window.location.href.split("?")[0];
         window.history.replaceState({}, "", cleanUrl);
     };
-    // const init: CardDto[] = [
-    //     {id: "1", name: "Tesco Clubcard", color: "#00539F", code: { value: "634009540032917769", type: "128" }},
-    //     {id: "2", name: "Lidl Plus", color: "#FFD500", code: { value: "77360008206828727", type: "qr"}},
-    //     {id: "3", name: "MOL Move", color: "#007A33", code: { value: "6369472225706715", type: "128"}},
-    //     {id: "4", name: "Decathlon", color: "#3643ba", code: { value: "2094038666954", type: "128"}},
-    //     {id: "5", name: "Aldi", color: "#1C5FA8",  code: { value: "123123123", type: "qr"}},
-    //     {id: "6", name: "Auchan", color: "#E30613", code: { value: "123123123", type: "qr"}},
-    // ];
-    // CardStorageService.save(init);
 
     const openScanCardView = (card: CardDto) => {
         setSelectedCard(card);
