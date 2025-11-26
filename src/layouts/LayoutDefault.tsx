@@ -5,7 +5,7 @@ export function LayoutDefault({ children, footer, header }: { children: React.Re
         <div className="flex flex-col w-full">
             {header || <header className="w-full py-4 flex-shrink-0">
                 <div className="flex justify-center items-center w-full">
-                    <h1>「Loyalty Cards」</h1>
+                    <h1>「LoyaltyCards」</h1>
                 </div>
             </header>}
             <main className="w-full flex-grow overflow-y-auto pb-32">

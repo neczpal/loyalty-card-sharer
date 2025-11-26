@@ -35,7 +35,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             <BaseIconButton
                 onClick={() => onEdit()}
                 iconName="add"
-                text="Add Card"
+                text=""
             />
         }
 
@@ -43,7 +43,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             <BaseIconButton
                 onClick={() => onShare()}
                 iconName="share"
-                text="Share"
+                text=""
             />
         }
         <BaseToggleButton
@@ -51,8 +51,8 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
             toggled={isEditModeOn}
             onIconName="close"
             offIconName="settings"
-            onText="Close"
-            offText="Edit"
+            onText=""
+            offText=""
         />
         {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;
