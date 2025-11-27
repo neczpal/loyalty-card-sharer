@@ -1,9 +1,9 @@
 import type { CardDto } from "../data/CardDto.ts";
 
-export default class CardStorageService {
-    private static readonly KEY = "cardList";
+class CardStorageService {
+    private readonly KEY = "cardList";
 
-    static save(cards: CardDto[]): void {
+    save(cards: CardDto[]): void {
         try {
             const json = JSON.stringify(cards);
             localStorage.setItem(this.KEY, json);
@@ -12,7 +12,7 @@ export default class CardStorageService {
         }
     }
 
-    static load(): CardDto[] {
+    load(): CardDto[] {
         try {
             const json = localStorage.getItem(this.KEY);
             if (!json) return [];
@@ -23,7 +23,7 @@ export default class CardStorageService {
         }
     }
 
-    static addOrUpdate(card: CardDto): void {
+    addOrUpdate(card: CardDto): void {
         try {
             let cards= this.load();
             cards = cards.filter(c => c.id !== card.id);
@@ -34,7 +34,7 @@ export default class CardStorageService {
         }
     }
 
-    static remove(card: CardDto): void {
+    remove(card: CardDto): void {
         try {
             const cards = this.load();
             const filtered = cards.filter(c => c.id !== card.id);
@@ -44,7 +44,10 @@ export default class CardStorageService {
         }
     }
 
-    static clear(): void {
+    clear(): void {
         localStorage.removeItem(this.KEY);
     }
 }
+
+const cardStorageService = new CardStorageService();
+export default cardStorageService;

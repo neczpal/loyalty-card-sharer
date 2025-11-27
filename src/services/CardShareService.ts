@@ -4,56 +4,88 @@ import LZString from "lz-string";
 import type {ShareCardDto} from "../data/ShareCardDto.ts";
 
 
-export default class CardShareService {
+class CardShareService {
 
-    static toShareFormat(cards: CardDto[]): ShareCardDto[] {
-        return cards.map(c => [
-            c.name,
-            c.color,
-            c.code.type,
-            c.code.value
-        ]);
+    private toShareFormat(card: CardDto): ShareCardDto {
+        return [
+            card.name,
+            card.color,
+            card.code.type,
+            card.code.value
+        ];
     }
 
-    static fromShareFormat(data: ShareCardDto[]): CardDto[] {
-        return data.map(arr => ({
+    private fromShareFormat(data: ShareCardDto): CardDto {
+        return {
             id: crypto.randomUUID(),
-            name: arr[0],
-            color: arr[1],
+            name: data[0],
+            color: data[1],
             code: {
-                type: arr[2],
-                value: arr[3]
+                type: data[2],
+                value: data[3]
             }
-        }));
+        };
     }
 
-    static exportBase64(): string {
+    private toShareAllFormat(cards: CardDto[]): ShareCardDto[] {
+        return cards.map(this.toShareFormat);
+    }
+
+    private fromShareAllFormat(data: ShareCardDto[]): CardDto[] {
+        return data.map(this.fromShareFormat);
+    }
+
+    private exportAllCompressed(): string {
         const cards = CardStorageService.load();
-        const shareData = this.toShareFormat(cards);
+        const shareData = this.toShareAllFormat(cards);
         return LZString.compressToEncodedURIComponent(JSON.stringify(shareData));
     }
 
-    static createShareUrl(): string {
-        const base64 = this.exportBase64();
-        const origin = window.location.origin;
-        const path = window.location.pathname;
-
-        return `${origin}${path}?share=${base64}`;
+    private exportSingleCompressed(card: CardDto): string {
+        const shareData = this.toShareFormat(card);
+        return LZString.compressToEncodedURIComponent(JSON.stringify(shareData));
     }
 
-    static importFromUrl(): CardDto[] | null {
+    createShareAllUrl(): string {
+        const base64 = this.exportAllCompressed();
+        const { origin, pathname } = window.location;
+        return `${origin}${pathname}?shareAll=${base64}`;
+    }
+
+    importAllFromUrl(): CardDto[] | null {
         const params = new URLSearchParams(window.location.search);
-        const encoded = params.get("share");
+        const encoded = params.get("shareAll");
         if (!encoded) return null;
 
         try {
             const json = LZString.decompressFromEncodedURIComponent(encoded);
             if (!json) return null;
             const shareData = JSON.parse(json) as ShareCardDto[];
-            return this.fromShareFormat(shareData);
+            return this.fromShareAllFormat(shareData);
         } catch (e) {
             console.error("Failed to decode shared card data", e);
             return null;
         }
     }
+
+    createShareUrl(card: CardDto): string {
+        const compressed = this.exportSingleCompressed(card);
+
+        const { origin, pathname } = window.location;
+        return `${origin}${pathname}?share=${compressed}`;
+    }
+
+    importShareFromUrl(): CardDto | null {
+        const params = new URLSearchParams(window.location.search);
+        const encoded = params.get("share");
+        if (!encoded) return null;
+
+        const json = LZString.decompressFromEncodedURIComponent(encoded);
+        if (!json) return null;
+        const shareData = JSON.parse(json) as ShareCardDto;
+        return this.fromShareFormat(shareData);
+    }
 }
+
+const cardShareService = new CardShareService();
+export default cardShareService;

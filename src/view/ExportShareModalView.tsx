@@ -19,7 +19,9 @@ export function ExportShareModalView({shareUrl, onClose}: {
                         size="large"
                     />
                 </div>
-                <BaseCopyField copyText={shareUrl} shareTitle="Share Loyalty Cards" shareText="Here is a link to my shared loyalty cards."/>
+                <BaseCopyField copyText={shareUrl}
+                               shareTitle="Share Loyalty Cards"
+                               shareText="Here is a link to my shared loyalty cards."/>
             </LayoutModal>
         </ModalWindow>
     );

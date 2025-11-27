@@ -6,38 +6,46 @@ import {useEffect, useState} from "react";
 import {EditCardModalView} from "./view/EditCardModalView.tsx";
 import {ImportShareModalView} from "./view/ImportShareModalView.tsx";
 import {ExportShareModalView} from "./view/ExportShareModalView.tsx";
-import CardStorageService from "./services/CardStorageService.ts";
-import CardShareService from "./services/CardShareService.ts";
+import cardShareService from "./services/CardShareService.ts";
+import cardStorageService from "./services/CardStorageService.ts";
 
 function App() {
     const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);
     const [scanOpen, setScanOpen] = useState(false);
     const [editorOpen, setEditorOpen] = useState(false);
-    const [allCards, setAllCards] = useState(CardStorageService.load());
+    const [allCards, setAllCards] = useState(cardStorageService.load());
     const [pendingSharedCards, setPendingSharedCards] = useState<CardDto[] | null>(null);
     const [importShareDialogOpen, setImportShareDialogOpen] = useState(false);
     const [shareWindowOpen, setShareWindowOpen] = useState(false);
 
     useEffect(() => {
-        const shared = CardShareService.importFromUrl();
-        const localCards = CardStorageService.load();
+        const shareAll = cardShareService.importAllFromUrl();
+        const localCards = cardStorageService.load();
 
-        // share link and no local cards -> import without dialog
-        if (shared && shared.length > 0 && localCards.length === 0) {
-            CardStorageService.save(shared);
-            setAllCards(shared);
-            clearShareQuery();
+        // share all link and no local cards -> import without dialog
+        if (shareAll && shareAll.length > 0 && localCards.length === 0) {
+            cardStorageService.save(shareAll);
+            setAllCards(shareAll);
+            clearQuery();
             return;
         }
 
-        // share link and existing cards -> show dialog
-        if (shared && shared.length > 0) {
-            setPendingSharedCards(shared);
+        // share all link and existing cards -> show dialog
+        if (shareAll && shareAll.length > 0) {
+            setPendingSharedCards(shareAll);
             setImportShareDialogOpen(true);
+        }
+
+        // share single link -> show add modal
+        const share = cardShareService.importShareFromUrl();
+        if (share) {
+            setEditorOpen(true);
+            setSelectedCard(share);
+            clearQuery();
         }
     }, []);
 
-    const clearShareQuery = () => {
+    const clearQuery = () => {
         const cleanUrl = window.location.href.split("?")[0];
         window.history.replaceState({}, "", cleanUrl);
     };
@@ -53,8 +61,8 @@ function App() {
     }
 
     const deleteCard = (card: CardDto) => {
-        CardStorageService.remove(card);
-        setAllCards(CardStorageService.load());
+        cardStorageService.remove(card);
+        setAllCards(cardStorageService.load());
     }
 
     const closeScanCard = () => {
@@ -64,15 +72,15 @@ function App() {
 
     const closeEditCard = (card?: CardDto) => {
         if (card) {
-            CardStorageService.addOrUpdate(card);
-            setAllCards(CardStorageService.load());
+            cardStorageService.addOrUpdate(card);
+            setAllCards(cardStorageService.load());
         }
         setSelectedCard(undefined);
         setEditorOpen(false);
     }
 
     const reorderCards = (cards: CardDto[]) => {
-        CardStorageService.save(cards);
+        cardStorageService.save(cards);
         setAllCards(cards);
     };
 
@@ -89,26 +97,26 @@ function App() {
             {importShareDialogOpen && pendingSharedCards &&
                 <ImportShareModalView
                     onOverride={() => {
-                        CardStorageService.save(pendingSharedCards);
+                        cardStorageService.save(pendingSharedCards);
                         setAllCards(pendingSharedCards);
-                        clearShareQuery();
+                        clearQuery();
                         setImportShareDialogOpen(false);
                     }}
                     onAddAll={() => {
                         const merged = [...allCards, ...pendingSharedCards];
-                        CardStorageService.save(merged);
+                        cardStorageService.save(merged);
                         setAllCards(merged);
-                        clearShareQuery();
+                        clearQuery();
                         setImportShareDialogOpen(false);
                     }}
                     onCancel={() => {
-                        clearShareQuery();
+                        clearQuery();
                         setImportShareDialogOpen(false)
                     }}
                 />
             }
             {shareWindowOpen &&
-                <ExportShareModalView shareUrl={CardShareService.createShareUrl()}
+                <ExportShareModalView shareUrl={cardShareService.createShareAllUrl()}
                                       onClose={() => setShareWindowOpen(false)}
                 />
             }
