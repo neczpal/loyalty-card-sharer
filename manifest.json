@@ -26,15 +26,29 @@
   ],
   "screenshots": [
     {
-      "src": "dark-desktop.png",
-      "sizes": "1177x995",
+      "src": "dark-wide.png",
+      "sizes": "2160x1620",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Loyalty Cards List Screen"
     },
     {
       "src": "dark-mobile.png",
-      "sizes": "500x996",
+      "sizes": "1110x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Loyalty Cards List Screen"
+    },
+    {
+      "src": "light-wide.png",
+      "sizes": "2160x1620",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Loyalty Cards List Screen"
+    },
+    {
+      "src": "light-mobile.png",
+      "sizes": "1110x2532",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Loyalty Cards List Screen"

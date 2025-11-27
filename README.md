@@ -2,7 +2,7 @@
 
 A mobile-first, backend-less web application for storing and sharing loyalty cards.
 
-Can be tried [here](http://neczpal.github.io/loyalty-card-sharer/dist)
+Can be tried [here](http://neczpal.github.io/loyalty-card-sharer)
 
 ## Features
 
@@ -16,6 +16,8 @@ Can be tried [here](http://neczpal.github.io/loyalty-card-sharer/dist)
 *   **Sharing:**
     *   Create a shareable link for one of your card or your entire loyalty card collection.
     *   When someone opens the link, they can choose to merge the shared collection with their existing cards, overwrite their collection, or cancel the import.
+*   **Dark/Light mode Support**
+
 
 ## Key Dependencies
 
@@ -24,3 +26,8 @@ Can be tried [here](http://neczpal.github.io/loyalty-card-sharer/dist)
 *   **Lodash:** A modern JavaScript utility library.
 *   **lz-string:** For compressing and decompressing strings, used for sharing.
 *   **React Movable:** For reordering the card list.
+
+## Screenshots
+
+![Dark Light Mode](dark-wide.png)
+![Dark Mobile Mode](dark-mobile.png)

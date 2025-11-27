@@ -28,6 +28,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
     const [search, setSearch] = useState("");
 
     const showSearch = !isEditModeOn && cards.length > 4;
+    const customizeText = showSearch ? "" : "Customize";
 
     const toggleEditMode = () => {
         const next = !isEditModeOn;
@@ -50,7 +51,6 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
                 variant="primary"
             />
         }
-
         {isEditModeOn &&
             <BaseIconButton
                 onClick={() => onShareAll()}
@@ -64,7 +64,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
             onIconName="done"
             offIconName="dashboard_customize"
             onText="Done"
-            offText="Customize"
+            offText={customizeText}
         />
         {showSearch && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;
@@ -86,34 +86,51 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
         );
     }
 
+    const staticList = <ul className="flex flex-col gap-4 w-full p-4 flex-grow justify-end md:justify-start">
+        {filteredCards.map(card => (
+            <li key={card.id} className="list-none">
+                <Tile
+                    card={card}
+                    isEditModeOn={isEditModeOn}
+                    onSelect={onOpen}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                />
+            </li>
+        ))}
+    </ul>;
+
     return (
         <DefaultLayout footer={footer}>
             {filteredCards.length > 0 ? (
-                <List
-                    values={filteredCards}
-                    onChange={({oldIndex, newIndex}) => {
-                        const updated = arrayMove(filteredCards, oldIndex, newIndex);
-                        onReorder(updated);
-                    }}
-                    renderList={({children, props}) => (
-                        <ul {...(isEditModeOn ? props : {})} className="flex flex-col gap-4 w-full p-4">
-                            {children}
-                        </ul>
-                    )}
-                    renderItem={({value: card, props}) => (
-                        <li {...(isEditModeOn ? props : {})} key={card.id} className="list-none">
-                            <Tile
-                                card={card}
-                                isEditModeOn={isEditModeOn}
-                                onSelect={isEditModeOn ? () => {} : onOpen}
-                                onEdit={onEdit}
-                                onDelete={onDelete}
-                            />
-                        </li>
-                    )}
-                />
+                isEditModeOn ? (
+                    <List
+                        values={filteredCards}
+                        onChange={({oldIndex, newIndex}) => {
+                            const updated = arrayMove(filteredCards, oldIndex, newIndex);
+                            onReorder(updated);
+                        }}
+                        renderList={({children, props}) => (
+                            <ul {...props}
+                                className="flex flex-col gap-4 w-full p-4 flex-grow justify-end md:justify-start">
+                                {children}
+                            </ul>
+                        )}
+                        renderItem={({value: card, props}) => (
+                            <li {...props} key={card.id} className="list-none">
+                                <Tile
+                                    card={card}
+                                    isEditModeOn={isEditModeOn}
+                                    onSelect={() => {}}
+                                    onEdit={onEdit}
+                                    onDelete={onDelete}
+                                />
+                            </li>
+                        )}
+                    />
+                ) : staticList
             ) : (
-                <div className="flex flex-col items-center justify-start h-full pt-16 text-center gap-2">
+                <div className="flex flex-col items-center justify-end md:justify-start h-full pt-16 text-center gap-2">
                     <p className="text-lg font-semibold">No results</p>
                     <p className="text-gray-500">No cards found matching "{search}".</p>
                 </div>
