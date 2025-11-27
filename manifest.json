@@ -34,7 +34,7 @@
     },
     {
       "src": "dark-mobile.png",
-      "sizes": "1110x2532",
+      "sizes": "1170x2532",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Loyalty Cards List Screen"
@@ -48,7 +48,7 @@
     },
     {
       "src": "light-mobile.png",
-      "sizes": "1110x2532",
+      "sizes": "1170x2532",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Loyalty Cards List Screen"
