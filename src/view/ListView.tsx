@@ -36,23 +36,24 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                 onClick={() => onEdit()}
                 iconName="add_card"
                 text="Add new card"
+                variant="primary"
             />
         }
 
-        {!isEditModeOn &&
+        {isEditModeOn &&
             <BaseIconButton
                 onClick={() => onShare()}
                 iconName="share"
-                text=""
+                text="Share all"
             />
         }
         <BaseToggleButton
             onClick={toggleEditMode}
             toggled={isEditModeOn}
-            onIconName="close"
+            onIconName="done"
             offIconName="dashboard_customize"
-            onText="Stop editing"
-            offText=""
+            onText="Done"
+            offText="Customize"
         />
         {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;

@@ -23,11 +23,11 @@ export function BaseDropdownInput({
                                       autofocus
                                   }: SelectInputProps) {
     return (
-        <div className="flex flex-col items-center gap-2 m-2">
-            <label className="text-md self-start" htmlFor={name}>{label}: </label>
+        <div className="flex flex-col items-center gap-2">
+            <label className="ml-2 text-md self-start" htmlFor={name}>{label}: </label>
             <select
                 name={name}
-                className="h-[40px] w-full px-4 bg-gray-100 dark:bg-gray-700"
+                className="indent-2 h-[40px] w-full bg-gray-100 dark:bg-gray-700"
                 value={value}
                 onChange={(e) => onChange(e.currentTarget.value)}
                 autoFocus={autofocus}
