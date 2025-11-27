@@ -1,4 +1,4 @@
-import {ModalWindow} from "../components/ModalWindow";
+import {ModalWindow} from "../components/ModalWindow.tsx";
 import {ModalLayout} from "../layouts/ModalLayout.tsx";
 import {BaseIconButton} from "../components/BaseIconButton.tsx";
 

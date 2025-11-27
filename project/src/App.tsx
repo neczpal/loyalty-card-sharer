@@ -1,4 +1,3 @@
-import './App.css'
 import type {CardDto} from "./data/CardDto.ts";
 import {ListView} from "./view/ListView.tsx";
 import {ScanCardModalView} from "./view/ScanCardModalView.tsx";

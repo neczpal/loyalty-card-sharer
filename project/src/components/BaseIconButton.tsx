@@ -1,4 +1,4 @@
-import {BaseIcon} from './BaseIcon';
+import {BaseIcon} from './BaseIcon.tsx';
 
 /**
  * Props for the BaseIconButton component.

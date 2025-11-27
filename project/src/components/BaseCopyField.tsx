@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {BaseToggleButton} from "./BaseToggleButton";
+import {BaseToggleButton} from "./BaseToggleButton.tsx";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
 /**

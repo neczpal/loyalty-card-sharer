@@ -1,5 +1,5 @@
-import {ModalWindow} from "../components/ModalWindow";
-import {BarCode} from "../components/BarCode";
+import {ModalWindow} from "../components/ModalWindow.tsx";
+import {BarCode} from "../components/BarCode.tsx";
 import {BaseCopyField} from "../components/BaseCopyField.tsx";
 import {ModalLayout} from "../layouts/ModalLayout.tsx";
 

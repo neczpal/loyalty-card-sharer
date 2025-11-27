@@ -1,4 +1,4 @@
-import { BaseIconButton } from './BaseIconButton';
+import { BaseIconButton } from './BaseIconButton.tsx';
 
 /**
  * Props for the BaseToggleButton component.

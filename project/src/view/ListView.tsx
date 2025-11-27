@@ -27,6 +27,8 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
     const [isEditModeOn, setIsEditModeOn] = useState(false);
     const [search, setSearch] = useState("");
 
+    const showSearch = !isEditModeOn && cards.length > 4;
+
     const toggleEditMode = () => {
         const next = !isEditModeOn;
         if (next) setSearch("");
@@ -44,7 +46,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
             <BaseIconButton
                 onClick={() => onEdit()}
                 iconName="add_card"
-                text="Add new card"
+                text="Add"
                 variant="primary"
             />
         }
@@ -53,7 +55,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
             <BaseIconButton
                 onClick={() => onShareAll()}
                 iconName="share"
-                text="Share all"
+                text="Share"
             />
         }
         <BaseToggleButton
@@ -64,7 +66,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder
             onText="Done"
             offText="Customize"
         />
-        {!isEditModeOn && cards.length > 4 && <BaseSearchField value={search} onChange={setSearch} />}
+        {showSearch && <BaseSearchField value={search} onChange={setSearch} />}
     </div>;
 
     if (cards.length === 0) {
