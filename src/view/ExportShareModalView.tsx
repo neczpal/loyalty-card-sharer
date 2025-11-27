@@ -1,28 +1,33 @@
 import {ModalWindow} from "../components/ModalWindow";
 import {BarCode} from "../components/BarCode";
 import {BaseCopyField} from "../components/BaseCopyField.tsx";
-import {LayoutModal} from "../layouts/LayoutModal.tsx";
+import {ModalLayout} from "../layouts/ModalLayout.tsx";
 
-export function ExportShareModalView({shareUrl, onClose}: {
-    shareUrl: string;
+/**
+ * A modal view for exporting and sharing all the loyalty cards.
+ * @param shareAllUrl The URL to be shared.
+ * @param onClose A callback function that is called when the modal is closed.
+ */
+export function ExportShareModalView({shareAllUrl, onClose}: {
+    shareAllUrl: string;
     onClose: () => void;
 }) {
     return (
         <ModalWindow onClose={onClose}>
-            <LayoutModal header="Share cards">
+            <ModalLayout header="Share cards">
                 <div className="self-center">
                     <BarCode
                         code={{
                             type: "qr",
-                            value: shareUrl
+                            value: shareAllUrl
                         }}
                         size="large"
                     />
                 </div>
-                <BaseCopyField copyText={shareUrl}
+                <BaseCopyField copyText={shareAllUrl}
                                shareTitle="Share Loyalty Cards"
                                shareText="Here is a link to my shared loyalty cards."/>
-            </LayoutModal>
+            </ModalLayout>
         </ModalWindow>
     );
 }

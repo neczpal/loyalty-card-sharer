@@ -1,5 +1,8 @@
 import {BaseIcon} from './BaseIcon';
 
+/**
+ * Props for the BaseIconButton component.
+ */
 type IconButtonProps = {
     onClick: () => void,
     text: string,
@@ -8,6 +11,14 @@ type IconButtonProps = {
     disabled?: boolean,
 }
 
+/**
+ * A base icon button component.
+ * @param onClick A callback function that is called when the button is clicked.
+ * @param text The text to display on the button.
+ * @param iconName The name of the material icon to display on the button.
+ * @param variant The variant of the button.
+ * @param disabled Whether the button is disabled.
+ */
 export function BaseIconButton({onClick, text, iconName, variant = 'default', disabled = false}: IconButtonProps) {
 
     const baseClasses = "flex g-1 items-center px-4 py-2 rounded-md";

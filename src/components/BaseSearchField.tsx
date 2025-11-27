@@ -1,11 +1,20 @@
 import { BaseIcon } from './BaseIcon';
 
+/**
+ * Props for the BaseSearchField component.
+ */
 interface BaseSearchFieldProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
 }
 
+/**
+ * A base search field component.
+ * @param value The value of the search field.
+ * @param onChange A callback function that is called when the value of the search field changes.
+ * @param placeholder The placeholder text for the search field.
+ */
 export function BaseSearchField({ value, onChange, placeholder = "Search" }: BaseSearchFieldProps) {
     return (
         <div className="relative flex items-center">

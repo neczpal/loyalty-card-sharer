@@ -1,6 +1,14 @@
 import type {CardDto} from "../data/CardDto.ts";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
+/**
+ * A tile component for displaying a loyalty card.
+ * @param card The card to display.
+ * @param isEditModeOn Whether the edit mode is on.
+ * @param onSelect A callback function that is called when the tile is selected.
+ * @param onEdit A callback function that is called when the edit button is clicked.
+ * @param onDelete A callback function that is called when the delete button is clicked.
+ */
 export function Tile({card, isEditModeOn, onSelect, onEdit, onDelete}: {
     card: CardDto,
     isEditModeOn: boolean,

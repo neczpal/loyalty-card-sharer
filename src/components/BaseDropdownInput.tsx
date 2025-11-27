@@ -1,8 +1,14 @@
+/**
+ * Represents an option in a select input.
+ */
 export type SelectOption = {
     label: string;
     value: string;
 };
 
+/**
+ * Props for the BaseDropdownInput component.
+ */
 export type SelectInputProps = {
     label: string;
     name: string;
@@ -13,6 +19,16 @@ export type SelectInputProps = {
     autofocus?: boolean;
 };
 
+/**
+ * A base dropdown input component.
+ * @param label The label for the input.
+ * @param name The name of the input.
+ * @param value The value of the input.
+ * @param onChange A callback function that is called when the value of the input changes.
+ * @param options The options for the input.
+ * @param placeholder The placeholder text for the input.
+ * @param autofocus Whether the input should be focused on mount.
+ */
 export function BaseDropdownInput({
                                       label,
                                       name,

@@ -2,6 +2,9 @@ import {useState} from "react";
 import {BaseToggleButton} from "./BaseToggleButton";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
+/**
+ * Props for the BaseCopyField component.
+ */
 interface BaseCopyFieldProps {
     copyText: string;
     shareTitle?: string;
@@ -9,6 +12,13 @@ interface BaseCopyFieldProps {
     shareUrl?: string;
 }
 
+/**
+ * A component for copying text to the clipboard and sharing it with url.
+ * @param copyText The text to be copied.
+ * @param shareTitle The title to be used when sharing.
+ * @param shareText The text to be used when sharing.
+ * @param shareUrl The URL to be used when sharing.
+ */
 export function BaseCopyField({copyText, shareTitle, shareText, shareUrl}: BaseCopyFieldProps) {
     const [copied, setCopied] = useState(false);
 

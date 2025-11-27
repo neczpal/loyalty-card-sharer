@@ -4,6 +4,9 @@ import LZString from "lz-string";
 import type {ShareCardDto} from "../data/ShareCardDto.ts";
 
 
+/**
+ * Service for handling sharing and importing of loyalty cards.
+ */
 class CardShareService {
 
     private toShareFormat(card: CardDto): ShareCardDto {
@@ -46,12 +49,20 @@ class CardShareService {
         return LZString.compressToEncodedURIComponent(JSON.stringify(shareData));
     }
 
+    /**
+     * Creates a URL for sharing all cards.
+     * @returns The URL for sharing all cards.
+     */
     createShareAllUrl(): string {
         const base64 = this.exportAllCompressed();
         const { origin, pathname } = window.location;
         return `${origin}${pathname}?shareAll=${base64}`;
     }
 
+    /**
+     * Imports all cards from a share URL.
+     * @returns An array of imported cards, or null if no share data is found in the URL.
+     */
     importAllFromUrl(): CardDto[] | null {
         const params = new URLSearchParams(window.location.search);
         const encoded = params.get("shareAll");
@@ -68,6 +79,11 @@ class CardShareService {
         }
     }
 
+    /**
+     * Creates a URL for sharing a single card.
+     * @param card The card to share.
+     * @returns The URL for sharing the card.
+     */
     createShareUrl(card: CardDto): string {
         const compressed = this.exportSingleCompressed(card);
 
@@ -75,6 +91,10 @@ class CardShareService {
         return `${origin}${pathname}?share=${compressed}`;
     }
 
+    /**
+     * Imports a single card from a share URL.
+     * @returns The imported card, or null if no share data is found in the URL.
+     */
     importShareFromUrl(): CardDto | null {
         const params = new URLSearchParams(window.location.search);
         const encoded = params.get("share");

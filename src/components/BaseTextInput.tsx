@@ -1,3 +1,6 @@
+/**
+ * Props for the BaseTextInput component.
+ */
 export type TextInputProps = {
     label: string;
     name: string;
@@ -9,6 +12,17 @@ export type TextInputProps = {
     autofocus?: boolean;
 }
 
+/**
+ * A base text input component.
+ * @param label The label for the input.
+ * @param name The name of the input.
+ * @param value The value of the input.
+ * @param onChange A callback function that is called when the value of the input changes.
+ * @param type The type of the input.
+ * @param placeholder The placeholder text for the input.
+ * @param onEnter A callback function that is called when the Enter key is pressed.
+ * @param autofocus Whether the input should be focused on mount.
+ */
 export function BaseTextInput({label, name, value, onChange, type, placeholder, onEnter, autofocus}:
                           TextInputProps) {
     return <div className="flex flex-col items-center gap-2">

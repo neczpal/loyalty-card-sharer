@@ -5,8 +5,14 @@ import {BaseIconButton} from "../components/BaseIconButton.tsx";
 import {BarCode} from "../components/BarCode.tsx";
 import type {CardDto} from "../data/CardDto.ts";
 import {useState} from "react";
-import {LayoutModal} from "../layouts/LayoutModal.tsx";
+import {ModalLayout} from "../layouts/ModalLayout.tsx";
 
+/**
+ * A modal view for editing or creating (including importing) a single loyalty card.
+ * @param card The card to edit. If not provided, a new card will be created.
+ * @param onExit A callback function that is called when the modal is closed.
+ *             If a card is saved, it is passed as an argument.
+ */
 export function EditCardModalView({card, onExit}: {
     card?: CardDto;
     onExit: (card?: CardDto) => void;
@@ -35,13 +41,15 @@ export function EditCardModalView({card, onExit}: {
 
     return (
         <ModalWindow onClose={() => onExit()}>
-            <LayoutModal header={header}>
+            <ModalLayout header={header}>
                 <div className="flex flex-col gap-2 h-full">
                     <BaseTextInput label="Name"
                                    name="displayName"
                                    placeholder="Displayed name of the card"
                                    value={displayName}
-                                   onChange={setDisplayName}/>
+                                   onChange={setDisplayName}
+                                   autofocus={true}
+                    />
 
                     <BaseDropdownInput label="Color" name="card_color" value={displayColor} onChange={setDisplayColor}
                                        options={[
@@ -87,7 +95,7 @@ export function EditCardModalView({card, onExit}: {
                         <BaseIconButton onClick={() => onExit()} text="Cancel" iconName="close" />
                     </div>
                 </div>
-            </LayoutModal>
+            </ModalLayout>
         </ModalWindow>
     );
 }

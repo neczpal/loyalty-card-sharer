@@ -2,17 +2,26 @@ import type {CardDto} from "../data/CardDto.ts";
 import {Tile} from "../components/Tile.tsx";
 import {useState, useMemo} from "react";
 import {List, arrayMove} from "react-movable";
-import {LayoutDefault} from "../layouts/LayoutDefault.tsx";
+import {DefaultLayout} from "../layouts/DefaultLayout.tsx";
 import {BaseSearchField} from "../components/BaseSearchField.tsx";
 import {BaseIconButton} from "../components/BaseIconButton.tsx";
 import {BaseToggleButton} from "../components/BaseToggleButton.tsx";
 
-export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: {
+/**
+ * A view that displays a list of loyalty cards.
+ * @param cards The list of cards to display.
+ * @param onOpen A callback function that is called when a card is opened.
+ * @param onEdit A callback function that is called when a card is edited.
+ * @param onDelete A callback function that is called when a card is deleted.
+ * @param onShareAll A callback function that is called when the share button is clicked.
+ * @param onReorder A callback function that is called when the list of cards is reordered.
+ */
+export function ListView({cards, onOpen, onEdit, onDelete, onShareAll, onReorder}: {
     cards: CardDto[];
     onOpen: (card: CardDto) => void;
     onEdit: (card?: CardDto) => void;
     onDelete: (card: CardDto) => void;
-    onShare: () => void;
+    onShareAll: () => void;
     onReorder: (cards: CardDto[]) => void;
 }) {
     const [isEditModeOn, setIsEditModeOn] = useState(false);
@@ -42,7 +51,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
 
         {isEditModeOn &&
             <BaseIconButton
-                onClick={() => onShare()}
+                onClick={() => onShareAll()}
                 iconName="share"
                 text="Share all"
             />
@@ -60,7 +69,7 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
 
     if (cards.length === 0) {
         return (
-            <LayoutDefault>
+            <DefaultLayout>
                 <div className="flex flex-col items-center justify-center h-full gap-4 text-center p-4">
                     <h2 className="text-3xl font-semibold">Your card collection is empty</h2>
                     <p className="text-gray-500">Get started by adding your first loyalty card.</p>
@@ -71,12 +80,12 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                         variant="primary"
                     />
                 </div>
-            </LayoutDefault>
+            </DefaultLayout>
         );
     }
 
     return (
-        <LayoutDefault footer={footer}>
+        <DefaultLayout footer={footer}>
             {filteredCards.length > 0 ? (
                 <List
                     values={filteredCards}
@@ -107,6 +116,6 @@ export function ListView({cards, onOpen, onEdit, onDelete, onShare, onReorder}: 
                     <p className="text-gray-500">No cards found matching "{search}".</p>
                 </div>
             )}
-        </LayoutDefault>
+        </DefaultLayout>
     );
 }

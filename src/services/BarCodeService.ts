@@ -2,6 +2,14 @@ import {debounce} from "lodash";
 
 const API_BASE_URL = "https://barcodeapi.org/api/";
 
+/**
+ * Fetches a barcode image from an external API: barcodeapi.org
+ * @param codeType The type of the barcode.
+ * @param codeValue The value of the barcode.
+ * @param setImageUrl A function to set the URL of the generated barcode image.
+ * @param setLoading A function to set the loading state.
+ * @param setError A function to set the error message.
+ */
 const fetchBarcode = (
     codeType: string,
     codeValue: string,
@@ -33,4 +41,9 @@ const fetchBarcode = (
 };
 
 
+/**
+ * A debounced version of the fetchBarcode function.
+ * This is useful for fetching barcodes based on user input, as it prevents sending a request for every keystroke.
+ * @see fetchBarcode
+ */
 export const delayedFetchBarcode = debounce(fetchBarcode, 400);

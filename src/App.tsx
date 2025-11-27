@@ -9,6 +9,10 @@ import {ExportShareModalView} from "./view/ExportShareModalView.tsx";
 import cardShareService from "./services/CardShareService.ts";
 import cardStorageService from "./services/CardStorageService.ts";
 
+/**
+ * The main component of the application.
+ * It manages the state of the application and renders the different views.
+ */
 function App() {
     const [selectedCard, setSelectedCard] = useState<CardDto | undefined>(undefined);
     const [scanOpen, setScanOpen] = useState(false);
@@ -91,7 +95,7 @@ function App() {
                 onOpen={(card) => openScanCardView(card)}
                 onEdit={(card) => openEditCardView(card)}
                 onDelete={(card) => deleteCard(card)}
-                onShare={() => setShareAllWindowOpen(true)}
+                onShareAll={() => setShareAllWindowOpen(true)}
                 onReorder={(cards) => reorderCards(cards)}
             />
             {importShareDialogOpen && pendingSharedCards &&
@@ -116,7 +120,7 @@ function App() {
                 />
             }
             {shareAllWindowOpen &&
-                <ExportShareModalView shareUrl={cardShareService.createShareAllUrl()}
+                <ExportShareModalView shareAllUrl={cardShareService.createShareAllUrl()}
                                       onClose={() => setShareAllWindowOpen(false)}
                 />
             }

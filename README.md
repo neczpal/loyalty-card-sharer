@@ -1,73 +1,26 @@
-# React + TypeScript + Vite
+# Loyalty Card Sharer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mobile-first, backend-less web application for storing and sharing loyalty cards.
 
-Currently, two official plugins are available:
+Can be tried [here](http://neczpal.github.io/loyalty-card-sharer/dist)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+*   **Local Storage:** Loyalty cards are stored locally in your browser.
+*   **Card Display:** Cards are displayed as tiles. Clicking on a tile shows the QR or barcode for scanning in-store.
+*   **Search:** A search bar appears when you have more than four cards, allowing you to filter them.
+*   **Edit Mode:**
+    *   Add new loyalty cards by entering the card code, format (barcode/QR), store name, and an optional color for easy identification.
+    *   Delete and reorder cards.
+    *   Edit existing cards.
+*   **Sharing:**
+    *   Create a shareable link for one of your card or your entire loyalty card collection.
+    *   When someone opens the link, they can choose to merge the shared collection with their existing cards, overwrite their collection, or cancel the import.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Dependencies
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   **React:** For building the user interface.
+*   **Tailwind CSS:** For styling the application.
+*   **Lodash:** A modern JavaScript utility library.
+*   **lz-string:** For compressing and decompressing strings, used for sharing.
+*   **React Movable:** For reordering the card list.

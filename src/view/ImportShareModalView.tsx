@@ -1,7 +1,13 @@
 import {ModalWindow} from "../components/ModalWindow";
-import {LayoutModal} from "../layouts/LayoutModal.tsx";
+import {ModalLayout} from "../layouts/ModalLayout.tsx";
 import {BaseIconButton} from "../components/BaseIconButton.tsx";
 
+/**
+ * A dialog view for importing shared loyalty cards.
+ * @param onOverride A callback function that is called when the user chooses to override their existing cards.
+ * @param onAddAll A callback function that is called when the user chooses to add the shared cards to their existing cards.
+ * @param onCancel A callback function that is called when the user cancels the import.
+ */
 export function ImportShareModalView({
     onOverride,
     onAddAll,
@@ -14,7 +20,7 @@ export function ImportShareModalView({
 
     return (
         <ModalWindow onClose={onCancel} size="dialog">
-            <LayoutModal header="Import shared cards">
+            <ModalLayout header="Import shared cards">
                     <p className="text-center mb-4">You already have cards on this device what do you want to do?</p>
 
                     <div className="flex gap-4 justify-center">
@@ -36,7 +42,7 @@ export function ImportShareModalView({
                             iconName="cancel"
                         />
                     </div>
-            </LayoutModal>
+            </ModalLayout>
         </ModalWindow>
     );
 }

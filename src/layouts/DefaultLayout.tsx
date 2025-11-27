@@ -1,6 +1,16 @@
 import React from 'react';
 
-export function LayoutDefault({ children, footer, header }: { children: React.ReactNode, footer?: React.ReactNode, header?: React.ReactNode }) {
+/**
+ * The default layout for the application.
+ * @param children The main content of the page.
+ * @param footer The footer content of the page.
+ * @param header The header content of the page.
+ */
+export function DefaultLayout({children, footer, header}: {
+    children: React.ReactNode,
+    footer?: React.ReactNode,
+    header?: React.ReactNode
+}) {
     return (<>
             {header || <header className="w-full py-6 md:py-8 flex-shrink-0">
                 <div className="flex justify-center items-center w-full">

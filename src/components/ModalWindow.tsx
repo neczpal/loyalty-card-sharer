@@ -1,6 +1,13 @@
 import {useState} from "react";
 import {BaseIconButton} from "./BaseIconButton.tsx";
 
+/**
+ * A modal window component.
+ * @param children The content of the modal.
+ * @param color The background color of the modal.
+ * @param onClose A callback function that is called when the modal is closed.
+ * @param size The size of the modal.
+ */
 export function ModalWindow({children, color, onClose, size = 'modal'}: {
     children: React.ReactNode;
     color?: string;

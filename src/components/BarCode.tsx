@@ -3,6 +3,11 @@ import type {CodeDto} from "../data/CodeDto.ts";
 import {delayedFetchBarcode} from "../services/BarCodeService.ts";
 import spinner from '../assets/spinner.svg';
 
+/**
+ * A component for displaying a barcode.
+ * @param code The code to display.
+ * @param size The size of the barcode.
+ */
 export function BarCode({code, size}: {
     code: CodeDto,
     size?: 'small' | 'large',
