@@ -16,7 +16,7 @@ function App() {
     const [allCards, setAllCards] = useState(cardStorageService.load());
     const [pendingSharedCards, setPendingSharedCards] = useState<CardDto[] | null>(null);
     const [importShareDialogOpen, setImportShareDialogOpen] = useState(false);
-    const [shareWindowOpen, setShareWindowOpen] = useState(false);
+    const [shareAllWindowOpen, setShareAllWindowOpen] = useState(false);
 
     useEffect(() => {
         const shareAll = cardShareService.importAllFromUrl();
@@ -91,8 +91,8 @@ function App() {
                 onOpen={(card) => openScanCardView(card)}
                 onEdit={(card) => openEditCardView(card)}
                 onDelete={(card) => deleteCard(card)}
-                onShare={() => setShareWindowOpen(true)}
-                onReorder={(card) => reorderCards(card)}
+                onShare={() => setShareAllWindowOpen(true)}
+                onReorder={(cards) => reorderCards(cards)}
             />
             {importShareDialogOpen && pendingSharedCards &&
                 <ImportShareModalView
@@ -115,9 +115,9 @@ function App() {
                     }}
                 />
             }
-            {shareWindowOpen &&
+            {shareAllWindowOpen &&
                 <ExportShareModalView shareUrl={cardShareService.createShareAllUrl()}
-                                      onClose={() => setShareWindowOpen(false)}
+                                      onClose={() => setShareAllWindowOpen(false)}
                 />
             }
             {editorOpen &&

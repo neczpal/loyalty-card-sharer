@@ -4,7 +4,7 @@ type IconButtonProps = {
     onClick: () => void,
     text: string,
     iconName?: string,
-    variant?: 'primary' | 'danger' | 'cancel' | 'default',
+    variant?: 'primary' | 'danger' | 'default',
     disabled?: boolean,
 }
 
