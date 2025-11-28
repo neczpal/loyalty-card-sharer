@@ -20,10 +20,10 @@ export function ImportShareModalView({
 
     return (
         <ModalWindow onClose={onCancel} size="dialog">
-            <ModalLayout header="Import shared cards">
+            <ModalLayout header="Import cards">
                     <p className="text-center mb-4">You already have cards on this device what do you want to do?</p>
 
-                    <div className="flex gap-4 justify-center">
+                    <div className="flex gap-4 justify-center flex-wrap">
                         <BaseIconButton
                             onClick={onOverride}
                             text="Override"
